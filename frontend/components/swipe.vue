@@ -11,7 +11,7 @@
     <!-- Card Content -->
     <div
       v-if="!isLoading"
-      class="w-full text-dark transition-transform duration-500"
+      class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 text-dark transition-transform duration-500"
       :class="{ 'animate-new-card': newCardVisible }"
       :style="cardStyle"
       @mousedown="startSwipe"
@@ -26,10 +26,10 @@
         <!-- Footer Actions -->
         <div class="grid grid-cols-2 divide-x divide-light divide-full rounded-b-3xl text-center text-4xl bg-secondary">
           <button class="p-5 bg-accent hover:bg-opacity-80 rounded-bl-3xl" @click="swipeLeftAnimation">
-            🔄
+            {{ emojiLeftCard ? emojiLeftCard : '❔' }}
           </button>
           <button class="p-5 bg-accent hover:bg-opacity-80 rounded-br-3xl" @click="swipeRightAnimation">
-            ▶️
+            {{ emojiRightCard ? emojiRightCard : '❔' }}
           </button>
         </div>
       </div>
@@ -40,7 +40,7 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue';
 
-const emit = defineEmits(['swipeLeft', 'swipeRight']);
+const emit = defineEmits(['handleSwipeLeft', 'handleSwipeRight']);
 
 const props = defineProps({
   swipeLeftNewCard: {
@@ -48,6 +48,12 @@ const props = defineProps({
   },
   swipeRightNewCard : {
     type: Boolean,
+  },
+  emojiLeftCard: {
+    type: String
+  },
+  emojiRightCard: {
+    type: String
   },
 })
 
@@ -57,6 +63,7 @@ const isDragging = ref(false);
 const isLoading = ref(false);
 const newCardVisible = ref(false);
 let startX = 0;
+let isAnimating = false;
 
 const cardStyle = computed(() => ({
   transform: `translateX(${x.value}px) rotate(${rotation.value}deg)`,
@@ -88,25 +95,33 @@ const endSwipe = () => {
 };
 
 const swipeLeft = () => {
+  if (isAnimating) return;
+  isAnimating = true;
+
   if ( props.swipeLeftNewCard ) isLoading.value = true;
   x.value = -window.innerWidth;
   rotation.value = -30;
 
   setTimeout(() => {
-    emit('swipeLeft');
+    emit('handleSwipeLeft');
     if ( props.swipeLeftNewCard ) newCard() 
     resetCard();
+    isAnimating = false;
   }, 500);
 };
 
 const swipeRight = () => {
+  if (isAnimating) return;
+  isAnimating = true;
+
   if ( props.swipeRightNewCard ) isLoading.value = true;
   x.value = window.innerWidth;
   rotation.value = 30;
   setTimeout(() => {
-    emit('swipeRight');
+    emit('handleSwipeRight');
     if ( props.swipeRightNewCard ) newCard() 
     resetCard();
+    isAnimating = false;
   }, 500);
 };
 

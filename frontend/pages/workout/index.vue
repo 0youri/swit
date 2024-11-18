@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center flex-grow items-center gap-5">
-    <h1 class="text-center text-4xl">
+    <h1 class="text-center text-4xl font-medium">
       Choose your level
     </h1>
     <div class="flex flex-col justify-center text-center gap-5 cursor-pointer">
