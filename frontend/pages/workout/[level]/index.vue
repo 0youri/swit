@@ -7,43 +7,40 @@
     emojiLeftCard="🔄"
     emojiRightCard="▶️"
   >
-    <!-- Card Header -->
+    <!-- Loading State -->
     <template v-if="!exercises.length">
       <div class="p-5 space-y-10 animate-pulse">
-        <!-- Skeleton Header -->
         <div class="h-8 bg-gray-400 rounded w-2/3 mx-auto"></div>
         <div class="h-4 bg-gray-400 rounded w-1/3 mx-auto"></div>
-
-        <!-- Skeleton Body -->
         <div class="space-y-3">
-          <div class="h-12 bg-gray-400 rounded-xl w-full"></div>
-          <div class="h-12 bg-gray-400 rounded-xl w-full"></div>
-          <div class="h-12 bg-gray-400 rounded-xl w-full"></div>
-          <div class="h-12 bg-gray-400 rounded-xl w-full"></div>
-          <div class="h-12 bg-gray-400 rounded-xl w-full"></div>
+          <div
+            v-for="i in 5"
+            :key="i"
+            class="h-12 bg-gray-400 rounded-xl w-full"
+          ></div>
         </div>
       </div>
     </template>
+
+    <!-- Workout Content -->
     <template v-else>
       <div class="p-5 space-y-10">
+        <!-- Card Header -->
         <div class="flex flex-col items-center">
           <p class="text-4xl font-semibold">Your workout</p>
           <span class="text-md">
             {{ level }}
-            <span v-if="level === 'beginner'">😊</span>
-            <span v-else-if="level === 'intermediate'">😤</span>
-            <span v-else-if="level === 'advanced'">😈</span>
+            <span>{{ levelEmoji }}</span>
           </span>
         </div>
+
         <!-- Card Body -->
         <div class="flex flex-col items-center gap-5">
-          <div
+          <WorkoutCard
             v-for="exercise in exercises"
             :key="exercise.name"
-            class="text-2xl font-light border-2 w-full text-center py-4 border-dark rounded-xl"
-          >
-            {{ exercise.name }} • {{ exercise.task }}
-          </div>
+            :exercise="exercise"
+          />
         </div>
       </div>
     </template>
@@ -51,24 +48,37 @@
 </template>
 
 <script setup>
-  import { useExerciseStore } from '~/stores/exerciseStore';
+import { useExerciseStore } from '~/stores/exerciseStore';
+import WorkoutCard from '~/components/workoutcard.vue';
 
-  const { fetchExercises } = useExerciseStore();
-  const { exercises } = storeToRefs(useExerciseStore())
+const { fetchExercises } = useExerciseStore();
+const { exercises } = storeToRefs(useExerciseStore());
 
-  const router = useRouter();
-  const route = useRoute()
-  const level = ref(route.params.level)
+const router = useRouter();
+const route = useRoute();
+const level = ref(route.params.level);
 
-  const handleSwipeLeft = () => {
-    fetchExercises(level.value)
+// Computed property for emoji based on level
+const levelEmoji = computed(() => {
+  const emojiMap = {
+    beginner: '😊',
+    intermediate: '😤',
+    advanced: '😈',
   };
+  return emojiMap[level.value] || '';
+});
 
-  const handleSwipeRight = () => {
-    router.push(`/workout/${level.value}/exercises`);
-  };
+// Handle swipe actions
+const handleSwipeLeft = () => {
+  fetchExercises(level.value);
+};
 
-  onMounted(() => {
-    fetchExercises(level.value)
-  })
+const handleSwipeRight = () => {
+  router.push(`/workout/${level.value}/exercises`);
+};
+
+// Fetch exercises on mount
+onMounted(() => {
+  fetchExercises(level.value);
+});
 </script>

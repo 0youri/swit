@@ -2,10 +2,11 @@ import { defineStore } from 'pinia';
 
 export const useExerciseStore = defineStore('exerciseStore', () => {
   
-  const exercises = ref([])
+  const exercises = ref<{ name: string; task: string; done: boolean }[]>([]);
   const currentExerciseIndex = ref(0); 
   const workoutState = ref(false)
-  const allExercises = {
+
+  const allExercises: Record<string, { name: string; task: string }[]> = {
     beginner: [
       { name: 'Wall Sit', task: '1 min' },
       { name: 'Calf Raises', task: '25 reps' },
@@ -67,73 +68,72 @@ export const useExerciseStore = defineStore('exerciseStore', () => {
     ],
   };
 
-  function fetchExercises(level = 'beginner') {
-    const count = 5;
-    
-    if (!allExercises[level]) {
-      throw new Error(`Invalid level: ${level}`);
-    }
-  
-    // Shuffle and pick random exercises
-    const shuffled = allExercises[level].sort(() => Math.random() - 0.5);
-    exercises.value = shuffled.slice(0, count).map(exercise => ({
-      ...exercise,
-      done: false, // Add "done" status for each exercise
-    }));
-    
-    // Save chosen exercises and reset progress
+  // Internal helper function: shuffle and pick random exercises
+  const getRandomExercises = (
+    level: string,
+    count: number
+  ): { name: string; task: string; done: boolean }[] => {
+    const levelExercises = allExercises[level] || [];
+    return levelExercises
+      .sort(() => Math.random() - 0.5)
+      .slice(0, count)
+      .map((exercise) => ({ ...exercise, done: false }));
+  };
+
+  // Internal helper function: save state to localStorage
+  const saveStateToLocalStorage = () => {
     localStorage.setItem('chosenExercises', JSON.stringify(exercises.value));
-    workoutState.value = false; // Reset workout
-    currentExerciseIndex.value = 0; // Reset progress
-    localStorage.setItem('currentExerciseIndex', currentExerciseIndex.value);
+    localStorage.setItem('currentExerciseIndex', currentExerciseIndex.value.toString());
     localStorage.setItem('workoutState', JSON.stringify(workoutState.value));
-  }
+  };
 
+  // Public store functions
 
-  function loadFromLocalStorage() {
+  const fetchExercises = (level: string = 'beginner', count: number = 5) => {
+    if (!allExercises[level]) throw new Error(`Invalid level: ${level}`);
+    exercises.value = getRandomExercises(level, count);
+    currentExerciseIndex.value = 0;
+    workoutState.value = false;
+    saveStateToLocalStorage();
+  };
+
+  const loadFromLocalStorage = () => {
     const savedExercises = localStorage.getItem('chosenExercises');
     const savedIndex = localStorage.getItem('currentExerciseIndex');
     const savedWorkoutState = localStorage.getItem('workoutState');
 
-    if (savedExercises) {
-      exercises.value = JSON.parse(savedExercises);
-    }
-    if (savedIndex) {
-      currentExerciseIndex.value = parseInt(savedIndex, 10);
-    }
-    if (savedWorkoutState) {
-      workoutState.value = JSON.parse(savedWorkoutState);
-    }
-  }
+    if (savedExercises) exercises.value = JSON.parse(savedExercises);
+    if (savedIndex) currentExerciseIndex.value = parseInt(savedIndex, 10);
+    if (savedWorkoutState) workoutState.value = JSON.parse(savedWorkoutState);
+  };
 
-  function nextExercise(state: boolean) {
-    if (state) {
+  const nextExercise = (markDone: boolean = false) => {
+    if (markDone && exercises.value[currentExerciseIndex.value]) {
       exercises.value[currentExerciseIndex.value].done = true;
     }
-  
+
     if (currentExerciseIndex.value < exercises.value.length - 1) {
       currentExerciseIndex.value++;
     } else {
-      workoutState.value = true;
+      workoutState.value = true; // Mark workout as complete
     }
-  
-    localStorage.setItem('chosenExercises', JSON.stringify(exercises.value));
-    localStorage.setItem('currentExerciseIndex', currentExerciseIndex.value);
-    localStorage.setItem('workoutState', workoutState.value);
-  }
 
-  const currentExercise = computed(() => {
-    return exercises.value[currentExerciseIndex.value] || {};
-  });
+    saveStateToLocalStorage();
+  };
 
+  const currentExercise = computed(
+    () => exercises.value[currentExerciseIndex.value] || {}
+  );
 
   return {
+    // State
     exercises,
     currentExercise,
     currentExerciseIndex,
     workoutState,
+    // Public functions
     fetchExercises,
     loadFromLocalStorage,
     nextExercise,
-  }
+  };
 });
