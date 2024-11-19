@@ -1,10 +1,10 @@
 <template>
   <div class="bg-dark text-light cursor-pointer">
-    <Header />
-    <div class="h-screen flex flex-col">
+    <div class="h-dvh flex flex-col justify-between">
+      <Header />
       <slot />
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 

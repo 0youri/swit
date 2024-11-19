@@ -22,7 +22,7 @@
         <slot></slot>
 
         <!-- Footer Actions -->
-        <div class="grid grid-cols-2 divide-x divide-light text-center text-4xl bg-secondary rounded-b-3xl">
+        <div class="grid grid-cols-2 divide-x divide-light text-center text-3xl bg-secondary rounded-b-3xl">
           <button
             class="p-5 bg-accent hover:bg-opacity-80 rounded-bl-3xl"
             @click="swipeLeftAnimation"

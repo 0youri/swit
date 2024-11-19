@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-2xl font-light border-2 w-full text-center py-4 border-dark rounded-xl"
+    class="text-xl font-light border-2 w-full text-center py-4 border-dark rounded-xl"
   >
     {{ exercise.name }} • {{ exercise.task }}
   </div>

@@ -43,7 +43,7 @@
             <NuxtLink
               :to="youtubeLink"
               target="_blank"
-              class="flex text-4xl hover:text-dark/75 font-medium"
+              class="flex text-3xl hover:text-dark/75 font-medium"
             >
               {{ currentExercise.name }}
               <svg
@@ -61,7 +61,7 @@
                 />
               </svg>
             </NuxtLink>
-            <p class="text-2xl font-light">{{ currentExercise.task }}</p>
+            <p class="text-xl font-light">{{ currentExercise.task }}</p>
           </div>
         </div>
 

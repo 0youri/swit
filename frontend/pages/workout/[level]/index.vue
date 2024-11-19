@@ -27,7 +27,7 @@
       <div class="p-5 space-y-10">
         <!-- Card Header -->
         <div class="flex flex-col items-center">
-          <p class="text-4xl font-semibold">Your workout</p>
+          <p class="text-3xl font-semibold">Your workout</p>
           <span class="text-md">
             {{ level }}
             <span>{{ levelEmoji }}</span>

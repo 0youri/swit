@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-2 bg-dark/50 rounded-full">
+  <div class="relative w-full h-1.5 md:h-2 bg-dark/50 rounded-full">
     <!-- Filled Progress -->
     <div
       class="absolute h-full bg-dark rounded-full transition-all duration-300"
