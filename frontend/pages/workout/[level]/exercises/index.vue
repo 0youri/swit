@@ -1,6 +1,5 @@
 <template>
   <Swipe
-    :key="currentExerciseIndex"
     @handleSwipeLeft="handleSwipeLeft"
     @handleSwipeRight="handleSwipeRight"
     :swipeLeftNewCard="true"
