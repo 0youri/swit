@@ -80,7 +80,6 @@
   };
 
   const endSwipe = () => {
-    if (!isDragging.value) return;
     isDragging.value = false;
 
     if (x.value > 150) swipeRight();
