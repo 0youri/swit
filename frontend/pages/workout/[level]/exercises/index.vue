@@ -28,7 +28,7 @@
       <!-- Image Section -->
       <img
         class="rounded-t-3xl w-full"
-        :src="workoutState ? endWorkoutImage : currentMotivationImage"
+        :src="baseURL + (workoutState ? endWorkoutImage : currentMotivationImage)"
         alt="Motivation"
       />
 
@@ -87,6 +87,8 @@ import { useExerciseStore } from '~/stores/exerciseStore';
 import ProgressBar from '~/components/progressbar.vue';
 
 const router = useRouter();
+const config = useRuntimeConfig();
+const baseURL = config.app.baseURL;
 const { loadFromLocalStorage, nextExercise } = useExerciseStore();
 const {
   exercises,
@@ -111,10 +113,10 @@ const leftEmoji = computed(() => (workoutState.value ? '🔄' : '❌'));
 const rightEmoji = computed(() => (workoutState.value ? '🏁' : '✔️'));
 
 const currentMotivationImage = computed(
-  () => `~/img/motivation${currentExerciseIndex.value + 1}.gif`
+  () => `img/motivation${currentExerciseIndex.value + 1}.gif`
 );
 
-const endWorkoutImage = '~/img/end-workout.gif';
+const endWorkoutImage = 'img/end-workout.gif';
 
 const youtubeLink = computed(() =>
   `https://www.youtube.com/results?search_query=How to do ${currentExercise.value?.name || ''} ?`

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-dark text-light cursor-pointer">
-    <div class="flex flex-col justify-between gap-10">
+    <div class="lg:h-dvh flex flex-col justify-between gap-10">
       <Header />
       <slot />
       <Footer />
