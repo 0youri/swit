@@ -51,7 +51,7 @@
 import { useExerciseStore } from '~/stores/exerciseStore';
 import WorkoutCard from '~/components/workoutcard.vue';
 
-const { fetchExercises, loadFromLocalStorage } = useExerciseStore();
+const { fetchExercises } = useExerciseStore();
 const { exercises } = storeToRefs(useExerciseStore());
 
 const router = useRouter();
@@ -80,6 +80,5 @@ const handleSwipeRight = () => {
 // Fetch exercises on mount
 onMounted(() => {
   fetchExercises(level.value);
-  loadFromLocalStorage();
 });
 </script>

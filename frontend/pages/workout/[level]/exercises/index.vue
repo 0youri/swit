@@ -86,6 +86,7 @@ import { useExerciseStore } from '~/stores/exerciseStore';
 import ProgressBar from '~/components/progressbar.vue';
 
 const router = useRouter();
+const route = useRoute();
 const config = useRuntimeConfig();
 const baseURL = config.app.baseURL;
 const { loadFromLocalStorage, nextExercise } = useExerciseStore();
@@ -99,6 +100,13 @@ const {
 // On component mount, load exercises from localStorage
 onMounted(() => {
   loadFromLocalStorage();
+});
+
+router.beforeEach((to, from, next) => {
+  console.log('Level:', route.params.level); 
+  console.log('Navigating to:', to.fullPath);
+  console.log('Matched components:', to.matched);
+  next();
 });
 
 // Computed properties
