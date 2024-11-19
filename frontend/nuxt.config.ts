@@ -5,5 +5,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt'
-  ]
+  ],
+  app: {
+    baseURL: '/1app1week/swit/'
+  }
 })
