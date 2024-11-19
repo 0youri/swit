@@ -111,10 +111,10 @@ const leftEmoji = computed(() => (workoutState.value ? '🔄' : '❌'));
 const rightEmoji = computed(() => (workoutState.value ? '🏁' : '✔️'));
 
 const currentMotivationImage = computed(
-  () => `/img/motivation${currentExerciseIndex.value + 1}.gif`
+  () => `~/img/motivation${currentExerciseIndex.value + 1}.gif`
 );
 
-const endWorkoutImage = '/img/end-workout.gif';
+const endWorkoutImage = '~/img/end-workout.gif';
 
 const youtubeLink = computed(() =>
   `https://www.youtube.com/results?search_query=How to do ${currentExercise.value?.name || ''} ?`
