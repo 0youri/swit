@@ -1,11 +1,9 @@
 <template>
   <div class="bg-dark text-light cursor-pointer">
-    <div class="h-full">
-      <div class="flex flex-col justify-between gap-10">
-        <Header />
-        <slot />
-        <Footer />
-      </div>
+    <div class="flex flex-col justify-between gap-10">
+      <Header />
+      <slot />
+      <Footer />
     </div>
   </div>
 </template>
