@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-1.5 md:h-2 bg-dark/50 rounded-full">
+  <div class="relative w-full h-1 md:h-1.5 bg-dark/50 rounded-full">
     <!-- Filled Progress -->
     <div
       class="absolute h-full bg-dark rounded-full transition-all duration-300"
@@ -14,7 +14,7 @@
       :style="{ left: `${(index / (exercises.length - 1)) * 98}%` }"
     >
       <div
-        class="w-4 h-4 rounded-full transition-colors outline outline-3 duration-300"
+        class="w-3 h-3 lg:w-4 lg:h-4 rounded-full transition-colors outline outline-3 duration-300"
         :class="[
           exercises[index].done ? 'bg-green-600' : 'bg-red-600',
           exercises[index] === currentExercise && !workoutState
