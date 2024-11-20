@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center flex-grow items-center gap-5 pt-10">
+  <div class="flex flex-col justify-center flex-grow items-center gap-5 pt-5">
     <h1 class="text-center text-4xl ">
       Choose your level
     </h1>
