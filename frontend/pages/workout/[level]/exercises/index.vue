@@ -9,7 +9,7 @@
     :emojiRightCard="rightEmoji"
   >
     <!-- Loading State -->
-    <template v-if="!exercises.length">
+    <template v-if="!exercises.length && !imageLoaded">
       <div class="h-52 bg-gray-400 rounded-t-3xl animate-pulse"></div>
       <div class="p-5 space-y-10 animate-pulse">
         <div class="flex flex-col items-center text-center space-y-2">
@@ -30,6 +30,7 @@
         class="rounded-t-3xl w-full"
         :src="baseURL + (workoutState ? endWorkoutImage : currentMotivationImage)"
         alt="Motivation"
+        @load="onImageLoad"
       />
 
       <!-- Card Body -->
@@ -89,6 +90,7 @@ import ProgressBar from '~/components/progressbar.vue';
 const router = useRouter();
 const config = useRuntimeConfig();
 const baseURL = config.app.baseURL;
+const imageLoaded = ref(false);
 const { loadFromLocalStorage, nextExercise } = useExerciseStore();
 const {
   exercises,
@@ -101,6 +103,10 @@ const {
 onMounted(() => {
   loadFromLocalStorage();
 });
+
+const onImageLoad = () => {
+  imageLoaded.value = true;
+};
 
 // Computed properties
 const currentStepPercentage = computed(() =>
