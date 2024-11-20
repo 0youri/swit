@@ -1,7 +1,14 @@
 <template>
-  <NuxtLink to="  https://linktr.ee/0youri" target="_blank" class="flex justify-center text-lg text-center px-2 pb-5">
-    @0youri
-  </NuxtLink>
+  <footer class="flex justify-center pb-5 gap-2 items-center text-lg">
+    <NuxtLink to="https://linktr.ee/0youri" target="_blank">
+      @0youri
+    </NuxtLink>
+    <span>•</span>
+    <NuxtLink to="https://github.com/0youri/swit" target="_blank">
+      github repo
+    </NuxtLink>
+    
+  </footer>
 </template>
 
 <script lang="ts" setup>
