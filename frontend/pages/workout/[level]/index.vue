@@ -24,7 +24,7 @@
 
     <!-- Workout Content -->
     <template v-else>
-      <div class="p-5 space-y-10">
+      <div class="p-5 space-y-5">
         <!-- Card Header -->
         <div class="flex flex-col items-center">
           <p class="text-3xl font-semibold">Your workout</p>

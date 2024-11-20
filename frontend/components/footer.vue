@@ -1,6 +1,6 @@
 <template>
-  <NuxtLink to="http://0youri.com" target="_blank" class="flex justify-center text-xl text-center px-2 pb-10">
-    @0youri    
+  <NuxtLink to="  https://linktr.ee/0youri" target="_blank" class="flex justify-center text-lg text-center px-2 pt-10 pb-10">
+    @0youri
   </NuxtLink>
 </template>
 

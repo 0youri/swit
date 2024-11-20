@@ -1,8 +1,7 @@
 <template>
   <div class="bg-dark text-light cursor-pointer">
-    <div class="min-h-dvh flex flex-col justify-between gap-10">
+    <div class="min-h-dvh flex flex-col justify-between gap-5">
       <Header />
-      <div></div>
       <slot />
       <Footer />
     </div>

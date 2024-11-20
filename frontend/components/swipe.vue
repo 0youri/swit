@@ -19,7 +19,7 @@
       @mouseup="endSwipe"
       @mouseleave="endSwipe"
     >
-      <div class="bg-primary mx-5 rounded-3xl space-y-10">
+      <div class="bg-primary mx-5 rounded-3xl">
         <!-- Slot for Card Content -->
         <slot></slot>
 

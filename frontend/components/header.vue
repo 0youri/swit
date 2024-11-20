@@ -1,9 +1,9 @@
 <template>
-  <header class="flex flex-col items-center gap-2 text-center px-2 pt-10">
-    <span class="text-xl">{ swit }</span>
-    <span class="ml-2 px-2 py-1 text-xs font-medium text-dark bg-yellow-300 rounded">
-      🚧 Beta
+  <header class="flex flex-col justify-center items-center gap-5 text-center">
+    <span class="w-full py-1 text-xs font-medium text-dark bg-yellow-300">
+      🚧 demo 
     </span>
+    <span class="text-xl">{ swit }</span>
   </header>
 </template>
 
