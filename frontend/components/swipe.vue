@@ -1,7 +1,6 @@
 <template>
   <div
     class="flex flex-col justify-center flex-grow items-center relative"
-    :class="isLoading ? 'h-dvh' : ''"
   >
     <!-- Loading Spinner -->
     <div v-if="isLoading" class="flex items-center space-x-2 text-light text-2xl">
