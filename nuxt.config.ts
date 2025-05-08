@@ -11,5 +11,19 @@ export default defineNuxtConfig({
     head: {
       title: "Swit 🏋️‍♂️",
     },
-  }
+  },
+  nitro: {
+    prerender: {
+      routes: [
+        '/',                     
+        '/workout',              
+        '/workout/beginner',     
+        '/workout/intermediate',
+        '/workout/advanced',    
+        '/workout/beginner/exercises',
+        '/workout/intermediate/exercises',
+        '/workout/advanced/exercises',
+      ]
+    }
+  },
 })
