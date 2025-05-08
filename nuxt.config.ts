@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
   app: {
-    baseURL: 'swit/',
+    baseURL: '/swit/',
     head: {
       title: "Swit 🏋️‍♂️",
     },
