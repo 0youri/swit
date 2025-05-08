@@ -56,7 +56,8 @@ const { exercises } = storeToRefs(useExerciseStore());
 
 const router = useRouter();
 // const route = useRoute();
-const { level } = defineProps<{ level: string }>()
+const props = defineProps(['level'])
+const level = props.level
 
 // Computed property for emoji based on level
 const levelEmoji = computed(() => {
