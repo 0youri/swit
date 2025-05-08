@@ -55,8 +55,8 @@ const { fetchExercises } = useExerciseStore();
 const { exercises } = storeToRefs(useExerciseStore());
 
 const router = useRouter();
-const route = useRoute();
-const level = ref(route.params.level);
+// const route = useRoute();
+const { level } = defineProps<{ level: string }>()
 
 // Computed property for emoji based on level
 const levelEmoji = computed(() => {
@@ -65,20 +65,20 @@ const levelEmoji = computed(() => {
     intermediate: '😤',
     advanced: '😈',
   };
-  return emojiMap[level.value] || '';
+  return emojiMap[level] || '';
 });
 
 // Handle swipe actions
 const handleSwipeLeft = () => {
-  fetchExercises(level.value);
+  fetchExercises(level);
 };
 
 const handleSwipeRight = () => {
-  router.push(`/workout/${level.value}/exercises`);
+  router.push(`/workout/${level}/exercises`);
 };
 
 // Fetch exercises on mount
 onMounted(() => {
-  fetchExercises(level.value);
+  fetchExercises(level);
 });
 </script>
